@@ -19,9 +19,9 @@
         <div class="my-3">
             <label class="form-label">Creator</label>
             <select class="form-control" name="posted_by" required>
-                <option value="1">Hossam</option>
-                <option value="2">Nader</option>
-                <option value="2">3bsi</option>
+                <option value="Hossam">Hossam</option>
+                <option value="Ali">Ali</option>
+                <option value="Mohammed">Mohammed</option>
             </select>
         </div>
 

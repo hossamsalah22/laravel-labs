@@ -29,8 +29,12 @@
                     <td>
                         <a href="{{ route('posts.show', $post['id']) }}" class="btn btn-primary">View</a>
                         <a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-warning">Edit</a>
-                        <a href="{{ route('posts.destroy', $post['id']) }}" class="btn btn-danger"
-                            onclick="return confirm('{{ __('Are you sure you want to delete?') }}')">Delete</a>
+                        <form action="{{ route('posts.destroy', $post['id']) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('{{ __('Are you sure you want to delete?') }}')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

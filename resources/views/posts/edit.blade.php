@@ -21,9 +21,9 @@
         <div class="my-3">
             <label class="form-label">Creator</label>
             <select class="form-control" required>
-                <option value="1" {{ $post['posted_by'] == 1 ? 'selected' : '' }}>Hossam</option>
-                <option value="2" {{ $post['posted_by'] == 2 ? 'selected' : '' }}>Nader</option>
-                <option value="2" {{ $post['posted_by'] == 3 ? 'selected' : '' }}>3bsi</option>
+                <option value="Hossam" {{ $post['posted_by'] == 'Hossam' ? 'selected' : '' }}>Hossam</option>
+                <option value="Ali" {{ $post['posted_by'] == 'Ali' ? 'selected' : '' }}>Ali</option>
+                <option value="Mohammed" {{ $post['posted_by'] == 'Mohammed' ? 'selected' : '' }}>Mohammed</option>
 
             </select>
         </div>
