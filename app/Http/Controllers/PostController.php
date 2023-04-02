@@ -80,15 +80,8 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function editComment($postId, $id)
-    {
-        $comment = Comment::find($id)->first();
-        return view('posts.editComment', ['comment' => $comment]);
-    }
-
     public function updateComment(Request $request, $id)
     {
-
         $comment = Comment::find($id);
         if ($comment) {
             $comment->filename = $request->filename;
@@ -104,6 +97,13 @@ class PostController extends Controller
         if ($comment) {
             $comment->delete();
         }
+        return redirect()->back();
+    }
+
+    public function restore()
+    {
+        Post::withTrashed()
+            ->restore();
         return redirect()->back();
     }
 }

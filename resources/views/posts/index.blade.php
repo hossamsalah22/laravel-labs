@@ -7,6 +7,9 @@
 @section('content')
     <div class="text-center">
         <a href="{{ route('posts.create') }}" class="btn btn-success form-control mt-5">Create Post</a>
+        <a href="{{ route('posts.restore') }}"
+            onclick="return confirm('{{ __('Are you sure you want to Restore All Posts?') }}')"
+            class="btn btn-danger form-control mt-5">Restore All Posts</a>
     </div>
     <table class="table table-dark table-responsive text-center mt-4">
         <thead>
@@ -41,7 +44,7 @@
 
         </tbody>
     </table>
-    <div class="d-flex">
+    <div class="pagination justify-content-center">
         {{ $posts->links() }}
     </div>
 @endsection
