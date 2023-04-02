@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,6 +77,33 @@ class PostController extends Controller
         $post->comments()->create([
             'filename' => $data['filename']
         ]);
+        return redirect()->back();
+    }
+
+    public function editComment($postId, $id)
+    {
+        $comment = Comment::find($id)->first();
+        return view('posts.editComment', ['comment' => $comment]);
+    }
+
+    public function updateComment(Request $request, $id)
+    {
+
+        $comment = Comment::find($id);
+        if ($comment) {
+            $comment->filename = $request->filename;
+        }
+        $comment->save();
+
+        return redirect()->route('posts.show', $comment->commentable_id);
+    }
+
+    public function deleteComment($id)
+    {
+        $comment = Comment::find($id);
+        if ($comment) {
+            $comment->delete();
+        }
         return redirect()->back();
     }
 }

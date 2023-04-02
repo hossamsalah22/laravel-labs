@@ -26,13 +26,21 @@
     </div>
 
     <div class="card mt-4">
-        <div class="card-header">
+        <div class="card-header fw-bolder">
             Comments
         </div>
         @foreach ($post->comments as $comment)
             <div class="card-body">
                 <p class="card-text">{{ $comment->filename }}</p>
-                <p class="card-text text-danger">{{ $comment->created_at->diffForHumans() }}</p>
+                <p class="card-text text-danger">{{ $comment->updated_at->diffForHumans() }}</p>
+                <a href="{{ route('posts.editComment', [$comment->commentable_id, $comment->id]) }}"
+                    class="btn btn-warning">Edit</a>
+                <form action="{{ route('posts.deleteComment', $comment->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('{{ __('Are you sure you want to delete?') }}')">Delete</button>
+                </form>
             </div>
         @endforeach
     </div>
