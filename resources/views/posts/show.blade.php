@@ -25,6 +25,18 @@
         </div>
     </div>
 
+    <div class="card mt-4">
+        <div class="card-header">
+            Comments
+        </div>
+        @foreach ($post->comments as $comment)
+            <div class="card-body">
+                <p class="card-text">{{ $comment->filename }}</p>
+                <p class="card-text">{{ $comment->created_at }}</p>
+            </div>
+        @endforeach
+    </div>
+
     <div class="card mt-5">
         <div class="card-body p-4">
             <div class="d-flex flex-start w-100">
@@ -32,12 +44,13 @@
                 <div class="w-100">
                     <h5>Add a comment</h5>
 
-                    <form action="">
+                    <form action="{{ route('posts.addComment', $post->id) }}" method="POST">
+                        @csrf
                         <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                            <textarea class="form-control" id="" name="filename" rows="4"></textarea>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
-                            <button type="button" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger">
                                 Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
                             </button>
                         </div>

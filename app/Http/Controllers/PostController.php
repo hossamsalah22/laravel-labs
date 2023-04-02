@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('comments')->where('id', $id)->first();
         return view('posts.show', ['post' => $post]);
     }
 
@@ -66,5 +66,16 @@ class PostController extends Controller
             $post->delete();
         }
         return redirect()->route('posts.index');
+    }
+
+    public function addComment($id, Request $request)
+    {
+        // dd($request->all());
+        $data = $request->all();
+        $post = Post::findOrFail($id);
+        $post->comments()->create([
+            'filename' => $data['filename']
+        ]);
+        return redirect()->back();
     }
 }
