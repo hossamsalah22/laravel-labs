@@ -18,10 +18,10 @@
 
         <div class="my-3">
             <label class="form-label">Creator</label>
-            <select class="form-control" name="posted_by" required>
-                <option value="Hossam">Hossam</option>
-                <option value="Ali">Ali</option>
-                <option value="Mohammed">Mohammed</option>
+            <select class="form-control" name="user_id" required>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
             </select>
         </div>
 

@@ -22,14 +22,14 @@
 
             @foreach ($posts as $post)
                 <tr>
-                    <td>{{ $post['id'] }}</td>
-                    <td>{{ $post['title'] }}</td>
-                    <td>{{ $post['posted_by'] }}</td>
-                    <td>{{ $post['created_at'] }}</td>
+                    <td>{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->user->name }}</td>
+                    <td>{{ $post->created_at->diffForHumans() }}</td>
                     <td>
-                        <a href="{{ route('posts.show', $post['id']) }}" class="btn btn-primary">View</a>
-                        <a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('posts.destroy', $post['id']) }}" method="POST">
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">View</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"
@@ -41,4 +41,7 @@
 
         </tbody>
     </table>
+    <div class="d-flex">
+        {{ $posts->links() }}
+    </div>
 @endsection
