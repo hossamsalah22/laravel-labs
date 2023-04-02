@@ -32,7 +32,7 @@
         @foreach ($post->comments as $comment)
             <div class="card-body">
                 <p class="card-text">{{ $comment->filename }}</p>
-                <p class="card-text">{{ $comment->created_at }}</p>
+                <p class="card-text text-danger">{{ $comment->created_at->diffForHumans() }}</p>
             </div>
         @endforeach
     </div>
