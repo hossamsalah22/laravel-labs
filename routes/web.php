@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view("welcome");
-});
+Route::get('/', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/posts')->group(function () {

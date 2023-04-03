@@ -31,6 +31,7 @@
         <div class="my-3">
             <label class="form-label">Creator</label>
             <select class="form-control" name="user_id">
+                <option value="" selected disabled>Select User</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
