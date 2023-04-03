@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -11,7 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(10);  //01.12.2016
+        $posts = Post::paginate(10);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -27,7 +28,7 @@ class PostController extends Controller
         return view('posts.create', ['users' => $users]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         $data = $request->all();
         Post::create([

@@ -28,7 +28,8 @@
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->user->name }}</td>
-                    <td>{{ $post->created_at->diffForHumans() }}</td>
+                    <td>{{ $post->human_readable_date }}</td>
+                    {{-- <td>{{ $post->created_at->diffForHumans() }}</td> --}}
                     <td>
                         <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">View</a>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>

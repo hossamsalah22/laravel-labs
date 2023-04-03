@@ -27,4 +27,9 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    protected function getHumanReadableDateAttribute()
+    {
+        return $this->created_at->format('j-F-Y, g:i A');
+    }
 }

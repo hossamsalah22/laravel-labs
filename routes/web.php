@@ -14,16 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/', function () {
+    return view("welcome");
+});
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/restore', [PostController::class, 'restore'])->name('posts.restore');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::post('/posts/{post}/comments', [PostController::class, 'addComment'])->name('posts.addComment');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-Route::put('/posts/{post}/comments', [PostController::class, 'updateComment'])->name('posts.updateComment');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-Route::delete('/posts/{post}/comments', [PostController::class, 'deleteComment'])->name('posts.deleteComment');
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('/posts')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('posts.index');
+        Route::get('/create', [PostController::class, 'create'])->name('posts.create');
+        Route::post('', [PostController::class, 'store'])->name('posts.store');
+        Route::get('/restore', [PostController::class, 'restore'])->name('posts.restore');
+        Route::get('/{post}', [PostController::class, 'show'])->name('posts.show');
+        Route::post('/{post}/comments', [PostController::class, 'addComment'])->name('posts.addComment');
+        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
+        Route::put('/{post}/comments', [PostController::class, 'updateComment'])->name('posts.updateComment');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+        Route::delete('/{post}/comments', [PostController::class, 'deleteComment'])->name('posts.deleteComment');
+    });
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
