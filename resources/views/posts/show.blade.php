@@ -33,7 +33,8 @@
             <div class="card-body">
                 <p class="card-text">{{ $comment->filename }}</p>
                 <p class="card-text text-danger">{{ $comment->updated_at->diffForHumans() }}</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#Modal_{{ $comment->id }}">
                     Edit
                 </button>
                 <form action="{{ route('posts.deleteComment', $comment->id) }}" method="POST">
@@ -45,7 +46,8 @@
             </div>
 
             {{-- Modal Comment --}}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="Modal_{{ $comment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -56,7 +58,8 @@
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
-                                <input type="text" class="form-control" name="filename" value="{{ $comment->filename }}">
+                                <input type="text" class="form-control" name="filename"
+                                    value="{{ $comment->filename }}">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
