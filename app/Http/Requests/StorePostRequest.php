@@ -25,6 +25,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|min:3|unique:posts,title',
             'description' => 'required|min:10|max:225',
             'user_id' => 'required | exists:users,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -39,6 +40,9 @@ class StorePostRequest extends FormRequest
             'description.max' => 'Desctiprion cannot exceed 225 character',
             'user_id.required' => 'Please Select User',
             'description.exists' => 'Invalid User ID',
+            'image.required' => 'Image is required',
+            'image.image' => 'Image is Invalid',
+            'image.max' => 'Max Size of image is 2 MB',
         ];
     }
 }

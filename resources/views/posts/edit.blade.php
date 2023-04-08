@@ -16,7 +16,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('posts.update', $post->id) }}" method="POST">
+    <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -39,6 +39,14 @@
                 @endforeach
 
             </select>
+        </div>
+
+
+        <div class="my-3">
+            <label class="col-sm-3 col-form-label">Image</label>
+            <div class="col-sm-9">
+                <input type="file" class="form-control" name="image" />
+            </div>
         </div>
 
         <button class="btn btn-success">Submit</button>

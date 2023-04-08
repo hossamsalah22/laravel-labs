@@ -16,6 +16,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Image</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
@@ -27,9 +29,11 @@
                 <tr>
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
+                    <td>{{ $post->slug }}</td>
+                    <td><img src="{{ $post->image }}" alt="" width="50px" height="50px">
+                    </td>
                     <td>{{ $post->user->name }}</td>
                     <td>{{ $post->human_readable_date }}</td>
-                    {{-- <td>{{ $post->created_at->diffForHumans() }}</td> --}}
                     <td>
                         <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">View</a>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>

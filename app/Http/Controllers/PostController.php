@@ -32,13 +32,14 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $data = $request->all();
-        Post::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'user_id' => $data['user_id'],
-        ]);
-
+        $post = Post::create($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $image_new_name = time() . $image->getClientOriginalName();
+            $image->move('uploads/posts', $image_new_name);
+            $post->image = 'uploads/posts/' . $image_new_name;
+        }
+        $post->save();
         return to_route('posts.index');
     }
 
@@ -52,12 +53,21 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, $id)
     {
+        // $client = $request->user();
         $post = Post::find($id);
         if ($post) {
-            $post->title = $request->title;
-            $post->description = $request->description;
-            $post->user_id = $request->user_id;
+            $post->update($request->except('image'));
+            if ($request->hasFile('image')) {
+                $old_image = $post->image;
+                $image = $request->image;
+                $image_new_name = time() . $image->getClientOriginalName();
+                if ($image->move('uploads/posts', $image_new_name)) {
+                    unlink($old_image);
+                }
+                $post->image = 'uploads/posts/' . $image_new_name;
+            }
         }
+
         $post->save();
 
         return to_route('posts.index');
