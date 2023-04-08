@@ -8,9 +8,14 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Jobs\PruneOldPostsJob;
+use Illuminate\Support\Facades\Queue;
+
+Queue::push(new PruneOldPostsJob);
 
 class PostController extends Controller
 {
+
     public function index()
     {
         $posts = Post::paginate(10);
