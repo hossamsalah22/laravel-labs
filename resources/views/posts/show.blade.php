@@ -10,8 +10,11 @@
             Post Info
         </div>
         <div class="card-body">
+            {{-- @dd($post->image) --}}
             <h5 class="card-title">Title: {{ $post->title }}</h5>
             <p class="card-text">Description: {{ $post->description }}</p>
+            <p>Image</p>
+            <img src="{{ $post->image }}" alt="{{ $post->title }}" width="50px" height="50px">
         </div>
     </div>
 

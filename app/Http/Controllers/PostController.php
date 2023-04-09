@@ -83,7 +83,9 @@ class PostController extends Controller
         $post = Post::find($id);
         if ($post) {
             $post->delete();
+            unlink($post->image);
         }
+
         return redirect()->route('posts.index');
     }
 
